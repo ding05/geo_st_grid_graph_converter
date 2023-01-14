@@ -17,6 +17,7 @@ def get_adj_mat(node_feat_mat: np.ndarray, threshold: float) -> np.ndarray:
       if abs(pearsonr(node_feat_mat[i], node_feat_mat[j])[0]) >= threshold:
         adj_mask.append((i, j))
         adj_mask.append((j, i))
+        print(f'Edges ({str(i)}, {str(j)}) and ({str(j)}, {str(i)}) were appeneded.')
   adj_mask = sorted(adj_mask)
   
   # Write the adjacency matrix in the form recognized by PyTorch Geometric.

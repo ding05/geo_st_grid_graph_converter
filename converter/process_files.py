@@ -20,7 +20,7 @@ def process_files(input_filepath: str, output_dirpath: str,
                                            grid_transposed.shape[1], 
                                            grid_transposed.shape[2])
   node_feats = grid_flattened
-  output(node_feats, output_dirpath, "node_feats")
+  output(node_feats, output_dirpath, 'node_feats')
   corr_threshold = float(str(corr_threshold))
   adj_mat = get_adj_mat(node_feats, corr_threshold)
-  output(adj_mat, output_dirpath, "adj_mat")
+  output(adj_mat, output_dirpath, 'adj_mat')
