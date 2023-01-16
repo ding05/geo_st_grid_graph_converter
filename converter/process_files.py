@@ -1,5 +1,6 @@
 from converter.input import *
 from converter.get_adj_mat import *
+from converter.drop_nodes import *
 from converter.output import *
 
 import numpy as np
@@ -19,7 +20,8 @@ def process_files(input_filepath: str, output_dirpath: str,
   grid_flattened = grid_transposed.reshape(grid_transposed.shape[0] * 
                                            grid_transposed.shape[1], 
                                            grid_transposed.shape[2])
-  node_feats = grid_flattened
+  # Remove nodes with NAs.
+  node_feats = drop_rows_with_nas(grid_flattened)
   output(node_feats, output_dirpath, 'node_feats')
   corr_threshold = float(str(corr_threshold))
   adj_mat = get_adj_mat(node_feats, corr_threshold)
