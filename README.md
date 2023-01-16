@@ -12,7 +12,7 @@ Python 3.7.15
 2. Navigate to [this](.) directory, which contains the README.md file.
 3. Run the program as a module: `python -m converter -h`. This will print the help message.
 4. Run the program as a module with real inputs: `python -m converter <input_filepath> <output_dirpath> <corr_threshold>`
-   For input, i.e. `python -m converter data/example.nc out 0.7`
+   For input, i.e. `python -m converter data/example.nc out 0.95`
 
 ### converter Usage:
 
