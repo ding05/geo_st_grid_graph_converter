@@ -6,13 +6,14 @@ from converter.output import *
 import numpy as np
 
 def process_files(input_filepath: str, output_dirpath: str, 
-                  corr_threshold: str) -> None:
+                  corr_threshold: str, is_directed: str) -> None:
   """
   Read the NC file that contains a spatiotemporal grid, and output the 
   converted graph in NPY files.
   :param input_filepath: the path to the input NC file
   :param output_dirpath: the path to the output directory
   :param corr_threshold: the corrleation threshold to mask adjacencies
+  :param is_directed: if the generated graph is directed
   """
   # Generate and save the vertex feature tensor.
   grid = input_grid(input_filepath)
@@ -23,6 +24,11 @@ def process_files(input_filepath: str, output_dirpath: str,
   # Remove nodes with NAs.
   node_feats = drop_rows_with_nas(grid_flattened)
   output(node_feats, output_dirpath, 'node_feats')
+  # Convert the string into the float.
   corr_threshold = float(str(corr_threshold))
-  adj_mat = get_adj_mat(node_feats, corr_threshold)
-  output(adj_mat, output_dirpath, 'adj_mat')
+  # Convert the string into the boolean.
+  is_directed_bool = True if str(is_directed) is 'yes' else False
+  is_directed_printed = 'directed' if is_directed_bool else ''
+  adj_mat = get_adj_mat(node_feats, corr_threshold, is_directed_bool)
+  output(adj_mat, output_dirpath, 'adj_mat' + '_' + str(threshold) + '_' 
+         + is_directed)
