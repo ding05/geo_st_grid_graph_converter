@@ -3,7 +3,7 @@ import pandas as pd
 
 def drop_rows_with_nas(grid: np.ndarray, *args, **kwarg) -> np.ndarray:
   """
-  Drop the rows with NAs in a NumPy.
+  Drop the rows with NAs in a NumPy array.
   :param input_filepath: a NumPy array possibly with NAs
   :return: a NumPy array
   """
