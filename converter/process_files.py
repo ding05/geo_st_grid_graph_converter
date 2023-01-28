@@ -35,7 +35,6 @@ def process_files(input_filepath: str, output_dirpath: str,
                  (grid_flattened[:, np.newaxis] == node_feats).all(-1))[0])
   coordinates_ocean = np.delete(coordinate_grid, land_indices, axis=0)
   output(coordinates_ocean, output_dirpath, 'coords')
-  
 
   # Convert the string into the float.
   corr_threshold = float(str(corr_threshold))
