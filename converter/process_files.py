@@ -41,7 +41,7 @@ def process_files(input_filepath: str, output_dirpath: str,
   
   # Convert the string into the boolean.
   is_directed_bool = True if str(is_directed) is 'yes' else False
-  is_directed_printed = 'directed' if is_directed_bool else ''
+  is_directed_printed = '_directed' if is_directed_bool else ''
   adj_mat = get_adj_mat(node_feats, corr_threshold, is_directed_bool)
-  output(adj_mat, output_dirpath, 'adj_mat' + '_' + str(corr_threshold) + '_' 
-         + is_directed_printed)
+  output(adj_mat, output_dirpath, 'adj_mat' + '_' + str(corr_threshold) + 
+         is_directed_printed)
