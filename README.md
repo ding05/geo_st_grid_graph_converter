@@ -11,7 +11,7 @@ Python 3.7.15
 1. Make sure Python has been installed on your computer.
 2. Navigate to [this](.) directory, which contains the README.md file.
 3. Run the program as a module: `python -m converter -h`. This will print the help message.
-4. Run the program as a module with real inputs: `python -m converter <input_filepath> <output_dirpath> <corr_threshold> <is_directed>`
+4. Run the program as a module with real inputs: `python -m converter <input_filepath> <output_dirpath> <corr_threshold> <is_directed> <get_coords>`
    For input, i.e. `python -m converter data/era5_sst_011950_082022_globe.nc out 0.9 yes no`
 
 ### converter Usage:
