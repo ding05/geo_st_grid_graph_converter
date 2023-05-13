@@ -12,7 +12,7 @@ Python 3.7.15
 2. Navigate to [this](.) directory, which contains the README.md file.
 3. Run the program as a module: `python -m converter -h`. This will print the help message.
 4. Run the program as a module with real inputs: `python -m converter <input_filepath> <output_dirpath> <corr_threshold> <is_directed> <get_coords>`
-   For input, i.e. `python -m converter data/era5_sst_011950_082022_globe.nc out 0.9 yes no`
+   For input, i.e. `python -m converter data/era5_sst_011940_122022_globe.nc out 0.9 no no`
 
 ### converter Usage:
 
@@ -29,3 +29,11 @@ positional arguments:
 optional arguments:
   -h, --help  show this help message and exit
 ```
+
+### Major Updates
+
+1. On May 13, 2023, the measure was changed from the Pearson correlation coefficient to the Kendall rank correlation coefficient.
+
+### Major Applications
+
+1. The program was used to generate graphs for [our paper to the ICLR 2023 Workshops](https://www.climatechange.ai/papers/iclr2023/39).
