@@ -48,6 +48,23 @@ def get_adj_mat(node_feat_mat: np.ndarray, threshold: float,
   adj_mat = np.array(adj_mat)
   
   # Add edges to the nodes with fewer than the minimum number edges.
-  # Work to be done.
+  for i in range(node_feat_mat.shape[0]):
+    pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i)) / 2
+    while pair_count < min_edges:
+      new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
+      while new_num == i:
+        new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
+      new_pair = (i, new_num)
+      if new_pair[0] > new_pair[1]:
+        new_pair = np.flip(new_pair)
+      if not np.any(np.all(np.transpose(adj_mat) == new_pair, axis=1)):
+        adj_mat = np.column_stack((adj_mat, new_pair))
+        adj_mat = np.column_stack((adj_mat, (new_pair[1], new_pair[0])))
+        print(f'Edges ({str(new_pair[0])}, {str(new_pair[1])}) and', 
+              '({str(new_pair[1])}, {str(new_pair[0])}) were appeneded.')        
+      pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i)) / 2
+  
+  sorted_indices = np.lexsort((edge[1], edge[0]))
+  sorted_edge = edge[:, sorted_indices]
   
   return adj_mat
