@@ -12,7 +12,7 @@ Python 3.7.15
 2. Navigate to [this](.) directory, which contains the README.md file.
 3. Run the program as a module: `python -m converter -h`. This will print the help message.
 4. Run the program as a module with real inputs: `python -m converter <input_filepath> <output_dirpath> <corr_threshold> <is_directed> <get_coords>`
-   For input, i.e. `python -m converter data/era5_sst_011940_122022_globe.nc out 0.7 no no`
+   For input, i.e. `python -m converter data/era5_sst_011940_122022_globe.nc out 0.7 no no 100`
 
 ### converter Usage:
 
@@ -25,6 +25,7 @@ positional arguments:
   corr_threshold     Node Feature Correlation Threshold
   is_directed        If Directed Graphs: `yes` or `no`
   get_coords         If Output Coordinates: `yes` or `no`
+  min_edges          Minimum Number of Edges for All Nodes
 
 optional arguments:
   -h, --help  show this help message and exit
@@ -33,6 +34,7 @@ optional arguments:
 ## Major Updates
 
 1. On May 13, 2023, the measure was changed from the Pearson correlation coefficient to the Kendall rank correlation coefficient.
+2. On July 2, 2023, the minimum number of edges was added, which generated up to the minimum number of edges to a node if the number of current edges to the node is smaller than the minimum.
 
 ## Major Applications
 
