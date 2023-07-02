@@ -8,7 +8,7 @@ import numpy as np
 
 def process_files(input_filepath: str, output_dirpath: str, 
                   corr_threshold: str, is_directed: str,
-                  get_coords: str) -> None:
+                  get_coords: str, min_edges: str) -> None:
   """
   Read the NC file that contains a spatiotemporal grid, and output the 
   converted graph in NPY files.
@@ -16,7 +16,8 @@ def process_files(input_filepath: str, output_dirpath: str,
   :param output_dirpath: the path to the output directory
   :param corr_threshold: the corrleation threshold to mask adjacencies
   :param is_directed: if the generated graph is directed
-  :param get_coords: if the node coordinates are output 
+  :param get_coords: if the node coordinates are output
+  :param min_edges: the minimum number of edges for all nodes
   """
   # Generate and save the node feature tensor.
   grid = input_grid(input_filepath)
@@ -40,12 +41,13 @@ def process_files(input_filepath: str, output_dirpath: str,
     coordinates_ocean = np.delete(coordinate_grid, land_indices, axis=0)
     output(coordinates_ocean, output_dirpath, 'coords')
 
-  # Convert the string into the float.
+  # Convert the string into the numerical.
   corr_threshold = float(str(corr_threshold))
+  min_edges = int(str(min_edges))
   
   # Convert the string into the boolean.
   is_directed_bool = True if str(is_directed) is 'yes' else False
   is_directed_printed = '_directed' if is_directed_bool else ''
-  adj_mat = get_adj_mat(node_feats, corr_threshold, is_directed_bool)
+  adj_mat = get_adj_mat(node_feats, corr_threshold, is_directed_bool, min_edges)
   output(adj_mat, output_dirpath, 'adj_mat' + '_' + str(corr_threshold) + 
-         is_directed_printed)
+         is_directed_printed + str(min_edges))
