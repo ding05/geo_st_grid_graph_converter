@@ -59,7 +59,7 @@ def get_adj_mat(node_feat_mat: np.ndarray, threshold: float,
           new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
         new_pair = (i, new_num)
         if not np.any(np.all(np.transpose(adj_mat) == new_pair, axis=1)):
-          # Generate add the edges in two directions to the adjacency matrix. 
+          # Generate add the edge in one direction to the adjacency matrix. 
           adj_mat = np.column_stack((adj_mat, new_pair))
           print(f'Edges ({str(new_pair[0])}, {str(new_pair[1])}) were appeneded.')        
         pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i))
