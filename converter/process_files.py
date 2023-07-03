@@ -33,6 +33,10 @@ def process_files(input_filepath: str, output_dirpath: str,
   node_feats = drop_rows_with_nas(grid_flattened)
   output(node_feats, output_dirpath, 'node_feats')
   
+  # Temporary: Test the program with a smaller node feature matrix.
+  # Comment the line below when normally running the program.
+  #node_feats = node_feats[:200]
+  
   # Output the coordinate tensor (slow).
   if str(get_coords) == 'yes':
     # Also remove the corresponding nodes in the coorindate tensor.
@@ -50,4 +54,4 @@ def process_files(input_filepath: str, output_dirpath: str,
   is_directed_printed = '_directed' if is_directed_bool else ''
   adj_mat = get_adj_mat(node_feats, corr_threshold, is_directed_bool, min_edges)
   output(adj_mat, output_dirpath, 'adj_mat' + '_' + str(corr_threshold) + 
-         is_directed_printed + str(min_edges))
+         is_directed_printed + '_' + str(min_edges))
