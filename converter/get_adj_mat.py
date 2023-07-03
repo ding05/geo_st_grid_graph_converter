@@ -50,22 +50,38 @@ def get_adj_mat(node_feat_mat: np.ndarray, threshold: float,
   # Add edges to the nodes with fewer than the minimum number edges.
   # In the current version, this function is only effective for generating
   # undirected graphs.
-  for i in range(node_feat_mat.shape[0]):
-    # Check the number of current edges.
-    pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i)) / 2
-    while pair_count < min_edges:
-      # Generate random node numbers for the target node to be connected to.
-      new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
-      while new_num == i:
+  if is_directed_bool:
+    for i in range(node_feat_mat.shape[0]):
+      # Check the number of current edges.
+      pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i))
+      while pair_count < min_edges:
+        # Generate random node numbers for the target node to be connected to.
         new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
-      new_pair = (i, new_num)
-      if not np.any(np.all(np.transpose(adj_mat) == new_pair, axis=1)):
-        # Generate add the edges in two directions to the adjacency matrix. 
-        adj_mat = np.column_stack((adj_mat, new_pair))
-        adj_mat = np.column_stack((adj_mat, (new_pair[1], new_pair[0])))
-        print(f'Edges ({str(new_pair[0])}, {str(new_pair[1])}) and', 
-              f'({str(new_pair[1])}, {str(new_pair[0])}) were appeneded.')        
-      pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i)) / 2
+        while new_num == i:
+          new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
+        new_pair = (i, new_num)
+        if not np.any(np.all(np.transpose(adj_mat) == new_pair, axis=1)):
+          # Generate add the edges in two directions to the adjacency matrix. 
+          adj_mat = np.column_stack((adj_mat, new_pair))
+          print(f'Edges ({str(new_pair[0])}, {str(new_pair[1])}) were appeneded.')        
+        pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i))
+  else:
+    for i in range(node_feat_mat.shape[0]):
+      # Check the number of current edges.
+      pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i))
+      while pair_count < min_edges:
+        # Generate random node numbers for the target node to be connected to.
+        new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
+        while new_num == i:
+          new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
+        new_pair = (i, new_num)
+        if not np.any(np.all(np.transpose(adj_mat) == new_pair, axis=1)):
+          # Generate add the edges in two directions to the adjacency matrix. 
+          adj_mat = np.column_stack((adj_mat, new_pair))
+          adj_mat = np.column_stack((adj_mat, (new_pair[1], new_pair[0])))
+          print(f'Edges ({str(new_pair[0])}, {str(new_pair[1])}) and', 
+                f'({str(new_pair[1])}, {str(new_pair[0])}) were appeneded.')        
+        pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i)) / 2
   # Sort the adjacency matrix that has been stored in a NumPy array.
   sorted_indices = np.lexsort((adj_mat[1], adj_mat[0]))
   adj_mat = adj_mat[:, sorted_indices]
