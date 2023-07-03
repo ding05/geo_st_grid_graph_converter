@@ -48,8 +48,6 @@ def get_adj_mat(node_feat_mat: np.ndarray, threshold: float,
   adj_mat = np.array(adj_mat)
   
   # Add edges to the nodes with fewer than the minimum number edges.
-  # In the current version, this function is only effective for generating
-  # undirected graphs.
   if is_directed_bool:
     for i in range(node_feat_mat.shape[0]):
       # Check the number of current edges.
