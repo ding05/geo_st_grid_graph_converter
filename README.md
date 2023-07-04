@@ -1,4 +1,4 @@
-# Geo Spatiotemporal Grid to Graph Converter
+# Geo-Spatiotemporal Grid to Graph Converter
 
 This program converts a geographic spatiotemporal grid in a NetCDF file into a graph in NumPy array files.
 
