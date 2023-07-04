@@ -54,4 +54,4 @@ def process_files(input_filepath: str, output_dirpath: str,
   is_directed_printed = '_directed' if is_directed_bool else ''
   adj_mat = get_adj_mat(node_feats, corr_threshold, is_directed_bool, min_edges)
   output(adj_mat, output_dirpath, 'adj_mat' + '_' + str(corr_threshold) + 
-         is_directed_printed + '_' + str(min_edges))
+         '_' + str(min_edges) + is_directed_printed)
