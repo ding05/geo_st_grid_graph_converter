@@ -10,6 +10,6 @@ def drop_rows_with_nas(grid: np.ndarray, *args, **kwarg) -> np.ndarray:
     assert isinstance(grid, np.ndarray)
     grid_dropped = pd.DataFrame(grid).dropna(*args, **kwarg).values
     if grid.ndim == 1:
-      grid_dropped = grid_dropped.flatten()
+        grid_dropped = grid_dropped.flatten()
     
     return grid_dropped

@@ -21,18 +21,18 @@ def get_adj_mat(node_feat_mat: np.ndarray, threshold: float,
     if is_directed_bool:
         for i in range(len(node_feat_mat)):
             for j in range(len(node_feat_mat)):
-              # Exclude self-connected nodes.
+                # Exclude self-connected nodes.
                 if i != j:
-                  #if abs(pearsonr(node_feat_mat[i][:-1], node_feat_mat[j][1:])[0]) >= threshold:
+                    #if abs(pearsonr(node_feat_mat[i][:-1], node_feat_mat[j][1:])[0]) >= threshold:
                     if abs(kendalltau(node_feat_mat[i][:-1], node_feat_mat[j][1:])[0]) >= threshold:
                         adj_mask.append((i, j))
                         print(f'Edge ({str(i)}, {str(j)}) was appeneded.')
     # To generate undirected graphs
     else:
         for i in range(len(node_feat_mat)):
-          # Exclude self-connected nodes.
+            # Exclude self-connected nodes.
             for j in range(i + 1, len(node_feat_mat)):
-              #if abs(pearsonr(node_feat_mat[i], node_feat_mat[j])[0]) >= threshold:
+                #if abs(pearsonr(node_feat_mat[i], node_feat_mat[j])[0]) >= threshold:
                 if abs(kendalltau(node_feat_mat[i], node_feat_mat[j])[0]) >= threshold:
                     adj_mask.append((i, j))
                     adj_mask.append((j, i))
