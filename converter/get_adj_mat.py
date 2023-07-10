@@ -54,9 +54,9 @@ def get_adj_mat(node_feat_mat: np.ndarray, threshold: float,
             pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i))
             while pair_count < min_edges:
                 # Generate random node numbers for the target node to be connected to.
-                new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
+                new_num = np.random.randint(0, node_feat_mat.shape[0])
                 while new_num == i:
-                    new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
+                    new_num = np.random.randint(0, node_feat_mat.shape[0])
                 new_pair = (i, new_num)
                 if not np.any(np.all(np.transpose(adj_mat) == new_pair, axis=1)):
                     # Generate add the edge in one direction to the adjacency matrix. 
@@ -69,9 +69,9 @@ def get_adj_mat(node_feat_mat: np.ndarray, threshold: float,
             pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i))
             while pair_count < min_edges:
                 # Generate random node numbers for the target node to be connected to.
-                new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
+                new_num = np.random.randint(0, node_feat_mat.shape[0])
                 while new_num == i:
-                    new_num = np.random.randint(0, node_feat_mat.shape[0] + 1)
+                    new_num = np.random.randint(0, node_feat_mat.shape[0])
                 new_pair = (i, new_num)
                 if not np.any(np.all(np.transpose(adj_mat) == new_pair, axis=1)):
                     # Generate add the edges in two directions to the adjacency matrix. 
