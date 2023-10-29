@@ -8,7 +8,7 @@ import numpy as np
 
 def process_files(input_filepath: str, output_dirpath: str, 
                   corr_threshold: str, is_directed: str,
-                  get_coords: str, min_edges: str) -> None:
+                  get_coords: str, min_edges: str, max_edges: str) -> None:
     """
     Read the NC file that contains a spatiotemporal grid, and output the 
     converted graph in NPY files.
@@ -18,6 +18,7 @@ def process_files(input_filepath: str, output_dirpath: str,
     :param is_directed: if the generated graph is directed
     :param get_coords: if the node coordinates are output
     :param min_edges: the minimum number of edges for all nodes
+    :param max_edges: the minimum number of edges for all nodes
     """
     # Generate and save the node feature tensor.
     grid = input_grid(input_filepath)
@@ -48,10 +49,11 @@ def process_files(input_filepath: str, output_dirpath: str,
     # Convert the string into the numerical.
     corr_threshold = float(str(corr_threshold))
     min_edges = int(str(min_edges))
+    max_edges = int(str(max_edges))
     
     # Convert the string into the boolean.
     is_directed_bool = True if str(is_directed) is 'yes' else False
     is_directed_printed = '_directed' if is_directed_bool else ''
-    adj_mat = get_adj_mat(node_feats, corr_threshold, is_directed_bool, min_edges)
+    adj_mat = get_adj_mat(node_feats, corr_threshold, is_directed_bool, min_edges, max_edges)
     output(adj_mat, output_dirpath, 'adj_mat' + '_' + str(corr_threshold) + 
-           '_' + str(min_edges) + is_directed_printed)
+           '_' + str(min_edges) + '_' + str(max_edges) + is_directed_printed)
