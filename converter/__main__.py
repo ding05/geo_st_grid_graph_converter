@@ -17,17 +17,14 @@ arg_parser.add_argument('get_coords', type=str,
                         help="If Output Coordinates: 'yes' or 'no'")
 arg_parser.add_argument('min_edges', type=str,
                         help='Minimum Number of Edges')
-arg_parser.add_argument('max_edges', type=str,
-                        help='Maximum Number of Edges')
 args = arg_parser.parse_args()
 
 input_filepath = Path(args.input_filepath)
 output_dirpath = Path(args.output_dirpath)
 corr_threshold = Path(args.corr_threshold)
 is_directed = Path(args.is_directed)
-get_coords = Path(args.min_edges)
+get_coords = Path(args.get_coords)
 min_edges = Path(args.min_edges)
-max_edges = Path(args.min_edges)
 
 # Read the input, process the input, and write the output.
-process_files(input_filepath, output_dirpath, corr_threshold, is_directed, get_coords, min_edges, max_edges)
+process_files(input_filepath, output_dirpath, corr_threshold, is_directed, get_coords, min_edges)
