@@ -13,7 +13,7 @@ def get_coord_mat(input_filepath: str) -> np.ndarray:
   
     # Get the latitute grid and the longitute grid.
     lat_grid, lon_grid = np.meshgrid(grid_dataset.lat, grid_dataset.lon)
-    lat_grid, lon_grid = np.transpose(lat_grid),np.transpose(lon_grid) 
+    lat_grid, lon_grid = np.transpose(lat_grid), np.transpose(lon_grid) 
     
     # Flatten the two grids.
     lat_grid_flattened = lat_grid.reshape(lat_grid.shape[0] * 
