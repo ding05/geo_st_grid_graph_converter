@@ -80,6 +80,7 @@ def get_adj_mat(node_feat_mat: np.ndarray, threshold: float,
                     print(f'Edges ({str(new_pair[0])}, {str(new_pair[1])}) and', 
                           f'({str(new_pair[1])}, {str(new_pair[0])}) were appeneded.')
                 pair_count = np.count_nonzero((adj_mat[0] == i) | (adj_mat[1] == i)) / 2
+    
     # Sort the adjacency matrix that has been stored in a NumPy array.
     sorted_indices = np.lexsort((adj_mat[1], adj_mat[0]))
     adj_mat = adj_mat[:, sorted_indices]
