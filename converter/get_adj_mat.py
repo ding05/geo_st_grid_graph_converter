@@ -40,6 +40,23 @@ def get_adj_mat(node_feat_mat: np.ndarray, threshold: float,
                           'appeneded.')
     adj_mask = sorted(adj_mask)
     
+    # Add full connections for selected nodes if required, avoiding duplicates.
+    # Convert the adjacency list to a set for efficient membership tests.
+    adj_set = set(adj_mask)
+    selected_nodes = [5612, 5104, 4610, 3260, 5242, 2004, 5263, 2801, 2058, 5005, 3124, 1734]
+    for node in selected_nodes:
+        for j in range(node_feat_mat.shape[0]):
+            if node != j:
+                # Check if the edge is already in the adjacency set
+                if (node, j) not in adj_set:
+                    adj_set.add((node, j))
+                    print(f'Edge ({node}, {j}) was appended.')
+                if not is_directed_bool and (j, node) not in adj_set:
+                    adj_set.add((j, node))
+                    print(f'Edge ({j}, {node}) was appended.')
+    # Convert the adjacency set back to a list and sort it.
+    adj_mask = sorted(adj_set)
+    
     # Write the adjacency matrix in the form recognized by PyTorch Geometric.
     adj_mat = [[], []]
     for i in adj_mask:
